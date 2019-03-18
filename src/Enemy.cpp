@@ -7,18 +7,18 @@ Enemy::Enemy(): rState(),pState()
     for (int i = 0 ; i < 4 ; i++)
 		frames[i].resize(2);
 
-    frames[0][0]=sf::IntRect(10, 4,28, 44);//Frente 0----0
-    frames[0][1]=sf::IntRect(58, 6,28, 42);//Frente 1----1
-    frames[1][0]=sf::IntRect(8,146,32, 46);//Detras 0----2
-    frames[1][1]=sf::IntRect(56, 148,32, 44);//Detras 1--3
-    frames[2][0]=sf::IntRect(6, 98,40, 46);//SideR 0-----4
-    frames[2][1]=sf::IntRect(54, 100,40, 44);//SideR 1---5
-    frames[3][0]=sf::IntRect(2, 50,40, 46);//SideL 0-----6
-    frames[3][1]=sf::IntRect(50, 52,40, 44);//SideL 1----7
+    frames[0][0]=sf::IntRect(5, 7,44, 38);//Frente 0----0
+
+    frames[1][0]=sf::IntRect(5,49,44, 37);//Detras 0----2
+
+    frames[2][0]=sf::IntRect(99, 7,44, 38);//SideR 0-----4
+
+    frames[3][0]=sf::IntRect(99, 49,43, 37);//SideL 0-----6
+
 
     //La carga de texturas podria ser otra clase
-    tex.loadFromFile("resources/sp_alien_texture.png");
-    if (!tex.loadFromFile("resources/sp_alien_texture.png"))
+    tex.loadFromFile("resources/ufo.png");
+    if (!tex.loadFromFile("resources/ufo.png"))
     {
         std::cerr << "Error cargando la imagen sp_alien_texture.png";
         exit(0);
@@ -49,13 +49,14 @@ void Enemy::setDir(int d,int f)
 
 void Enemy::updateEnemy(double px, double py, sf::Time et)
 {
-double x=0.0,y=0.0;
+double x=0.0,y=0.0,d=0;
 
 //move the nerd towards the player
-		if (px> pState.getPosNow()[0]){x+=20.0,y+=0.0; }
-        else if (px< pState.getPosNow()[0]){x+=-20.0,y+=0.0; }
-        if(py>pState.getPosNow()[1]) {y+=20.0,x+=0.0;}
-		else if(py < pState.getPosNow()[1]){y+=-20.0,x+=0.0; }
+		if (px> pState.getPosNow()[0]){x+=20.0,y+=0.0; d=2; }
+        else if (px< pState.getPosNow()[0]){x+=-20.0,y+=0.0; d=3; }
+        if(py>pState.getPosNow()[1]) {y+=20.0,x+=0.0; d=0;}
+		else if(py < pState.getPosNow()[1]){y+=-20.0,x+=0.0; d=1; }
+		dir=d;
 		pState.setVel(x,y,true);
 
 cout<<"Desplaza en x: "<<x<<endl;

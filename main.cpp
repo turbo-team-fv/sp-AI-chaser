@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-   Juego * sp_movement = new Juego(640,480,"Space Pizza - Character interpolated movement ANIMATED ");
+   Juego * sp_movement = new Juego(640,480,"Space Pizza - Enemy AI");
     sp_movement->loop();
     return 0;
 }
